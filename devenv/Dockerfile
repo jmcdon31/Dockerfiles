@@ -34,6 +34,6 @@ RUN mkdir -p .config/nvim/colors && \
     cd .. && curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/init.vim
 
 # When Bash starts make sure its in Vi mode with neovim set as the editor
-RUN echo -e 'set -o vi\nexport EDITOR="/usr/bin/nvim"' >> ~/.bashrc
+RUN echo 'set -o vi\nexport EDITOR="/usr/bin/nvim"' >> ~/.bashrc
 
 ENTRYPOINT [ "bash" ]
