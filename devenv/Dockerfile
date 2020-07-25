@@ -24,7 +24,8 @@ RUN apt-get update 		&& \
     apt-get install -y neovim   && \
     apt-get install -y tmux 	&& \
     apt-get install -y curl 	&& \
-    apt-get install -y git
+    apt-get install -y git 	&& \
+    apt-get install -y bash-completion
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -36,5 +37,9 @@ RUN mkdir -p .config/nvim/colors && \
 
 # When Bash starts make sure its in Vi mode with neovim set as the editor
 RUN echo 'set -o vi\nexport EDITOR="/usr/bin/nvim"' >> ~/.bashrc
+
+RUN   	git config --global user.email "jmcdon31@gmail.com"  && \
+  	git config --global user.name "Jason McDonald"
+
 
 ENTRYPOINT [ "bash" ]
