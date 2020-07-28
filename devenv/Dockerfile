@@ -57,8 +57,8 @@ RUN mkdir -p .config/nvim/colors && \
     cd .config/nvim/colors && \
     curl -O -J https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim && \
     cd .. && curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/init.vim && \
-    cd ../../ && curl https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.bashrc && \
-    curl https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.tmux.conf
+    cd ../../ && -O -J curl https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.bashrc && \
+    curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.tmux.conf
 
 # Setup Git globals
 RUN   	git config --global user.email "jmcdon31@gmail.com"  && \
