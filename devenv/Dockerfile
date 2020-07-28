@@ -60,11 +60,6 @@ RUN mkdir -p .config/nvim/colors && \
     cd ../../ && curl https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.bashrc && \
     curl https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.tmux.conf
 
-
-# When Bash starts make sure its in Vi mode with neovim set as the editor
-RUN	touch /home/${USER_NAME}/.bashrc && \
-	echo 'set -o vi\nexport EDITOR="/usr/bin/nvim"' >> /home/${USER_NAME}/.bashrc
-
 # Setup Git globals
 RUN   	git config --global user.email "jmcdon31@gmail.com"  && \
   	git config --global user.name "Jason McDonald"
