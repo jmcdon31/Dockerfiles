@@ -52,6 +52,15 @@ RUN apt-get update 		&& \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Set password for user so sudo can work in container
+RUN echo "${USER_NAME}:docker" | chpasswd && adduser ${USER_NAME} sudo
+
+# sudo: setrlimit(RLIMIT_CORE): Operation not permitted workaround
+RUN touch  /etc/sudo.conf && \
+    echo "Set disable_coredump false" >> /etc/sudo.conf
+
+USER ${USER_NAME}
+
 # Setup neovim with my vimrc and desired colorscheme
 RUN mkdir -p .config/nvim/colors && \
     cd .config/nvim/colors && \
@@ -64,12 +73,5 @@ RUN mkdir -p .config/nvim/colors && \
 # Setup Git globals
 RUN   	git config --global user.email "jmcdon31@gmail.com"  && \
   	git config --global user.name "Jason McDonald"
-
-# Set password for user so sudo can work in container
-RUN echo "${USER_NAME}:docker" | chpasswd && adduser ${USER_NAME} sudo
-
-# sudo: setrlimit(RLIMIT_CORE): Operation not permitted workaround
-RUN touch  /etc/sudo.conf && \
-    echo "Set disable_coredump false" >> /etc/sudo.conf
 
 ENTRYPOINT [ "bash" ]
