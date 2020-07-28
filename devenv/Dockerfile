@@ -18,7 +18,19 @@
 # Base Image
 FROM ubuntu:20.04
 
+ARG USER_ID
+ARG GROUP_ID
+
 WORKDIR	/root/
+
+
+RUN if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then \
+	groupadd -g ${GROUP_ID} jam &&\
+	useradd -l -u ${USER_ID} -g jam jam &&\
+	install -d -m 0755 -o jam -g jam /home/jam &&\
+;fi
+
+
 
 RUN apt-get update 		&& \
     apt-get install -y neovim   && \
