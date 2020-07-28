@@ -24,7 +24,6 @@
 #				devenv
 #
 #
-# 	OLD Run String = docker run -it  -v $PWD:/root/${PWD##*/} devenv
 #	
 #	${PWD##*/} - Parameter Expansion to get just the current directory name
 #		     without the full path
@@ -57,7 +56,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN mkdir -p .config/nvim/colors && \
     cd .config/nvim/colors && \
     curl -O -J https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim && \
-    cd .. && curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/init.vim
+    cd .. && curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/init.vim && \
+    cd ../../ && curl https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.bashrc && \
+    curl https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.tmux.conf
+
 
 # When Bash starts make sure its in Vi mode with neovim set as the editor
 RUN	touch /home/${USER_NAME}/.bashrc && \
