@@ -74,4 +74,4 @@ RUN mkdir -p .config/nvim/colors && \
 RUN   	git config --global user.email "jmcdon31@gmail.com"  && \
   	git config --global user.name "Jason McDonald"
 
-ENTRYPOINT [ "bash" ]
+ENTRYPOINT [ "tmux" ]
