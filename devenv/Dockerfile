@@ -40,26 +40,26 @@ RUN 	groupadd -g ${GROUP_ID} ${USER_NAME} && \
 	useradd -l -u ${USER_ID} -g ${USER_NAME} ${USER_NAME} && \
 	install -d -m 0755 -o ${USER_NAME} -g ${USER_NAME} /home/${USER_NAME}
 
-WORKDIR	/home/${USER_NAME}
-
 RUN apt-get update 		&& \
     apt-get install -y neovim   && \
     apt-get install -y tmux 	&& \
     apt-get install -y curl 	&& \
     apt-get install -y git 	&& \
     apt-get install -y sudo 	&& \
+    apt-get install -y cu 	&& \
     apt-get install -y bash-completion
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Set password for user so sudo can work in container
-RUN echo "${USER_NAME}:docker" | chpasswd && adduser ${USER_NAME} sudo
+RUN echo "${USER_NAME}:docker" | chpasswd && adduser ${USER_NAME} sudo 
 
 # sudo: setrlimit(RLIMIT_CORE): Operation not permitted workaround
 RUN touch  /etc/sudo.conf && \
     echo "Set disable_coredump false" >> /etc/sudo.conf
 
 USER ${USER_NAME}
+WORKDIR	/home/${USER_NAME}
 
 # Setup neovim with my vimrc and desired colorscheme
 RUN mkdir -p .config/nvim/colors && \
@@ -73,5 +73,8 @@ RUN mkdir -p .config/nvim/colors && \
 # Setup Git globals
 RUN   	git config --global user.email "jmcdon31@gmail.com"  && \
   	git config --global user.name "Jason McDonald"
+
+USER  /root
+WORKDIR	/
 
 ENTRYPOINT [ "tmux" ]
