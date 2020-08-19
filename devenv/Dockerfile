@@ -68,6 +68,7 @@ RUN mkdir -p .config/nvim/colors && \
     cd .. && curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/init.vim && \
     cd ../../ && curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.bashrc && \
     curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.tmux.conf   && \
+    curl -O -J https://raw.githubusercontent.com/jmcdon31/workflowfiles/master/.dircolors && \
     touch .bash_profile && echo "source ~/.bashrc" >> .bash_profile
 
 # Setup Git globals
