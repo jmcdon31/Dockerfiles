@@ -73,7 +73,8 @@ RUN mkdir -p .config/nvim/colors && \
 
 # Setup Git globals
 RUN   	git config --global user.email "jmcdon31@gmail.com"  && \
-  	git config --global user.name "Jason McDonald"
+  	git config --global user.name "Jason McDonald" && \
+	git config --global core.autocrlf true
 
 USER  root
 WORKDIR	/
